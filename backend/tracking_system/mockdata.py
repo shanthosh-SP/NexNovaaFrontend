@@ -6,14 +6,14 @@ import requests
 from geopy.distance import geodesic
 
 # --- SETUP DJANGO ENV ---
-PROJECT_PATH = "/mnt/d/All_Demos/nexathon-4o/tracking_system"
-sys.path.append(PROJECT_PATH)
+# PROJECT_PATH = "/mnt/d/All_Demos/nexathon-4o/tracking_system"
+# sys.path.append(PROJECT_PATH)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tracking_system.settings")
 django.setup()
 
 # --- IMPORT MODELS & WHATSAPP BOT ---
 from tracking.models import VehicleLocation
-from tracking.whatsapp_bot import send_whatsapp_message
+# from tracking.whatsapp_bot import send_whatsapp_message
 
 # --- MOCK DATA CONFIG ---
 start_location = (10.7905, 78.7047)  # Trichy
@@ -75,7 +75,7 @@ def send_mock_data():
             checkpoint_reached += 1
             message = f"🚛 Vehicle {vehicle_id} has traveled {int(distance_traveled)} KM, Now Heading to {current_destination}"
             print(f"📨 Sending WhatsApp: {message}")
-            send_whatsapp_message(message)  # << SEND NOTIFICATION
+            # send_whatsapp_message(message)  # << SEND NOTIFICATION
 
         time.sleep(2)
 

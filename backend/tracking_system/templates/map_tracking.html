@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehicle Live Tracking</title>
+  <style>
+    #map {
+      height: 90vh;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h2>🚚 Vehicle Live Tracking</h2>
+  <div id="map"></div>
+
+  <script>
+    let map, marker, routeLine;
+    const startLocation = { lat: 10.7905, lng: 78.7047 };  // Trichy
+    const endLocation = { lat: 34.0837, lng: 74.7973 };    // Kashmir
+
+    function initMap() {
+      // Initialize the map centered around the starting location
+      map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 6,
+        center: startLocation,
+      });
+
+      // Create a marker for the vehicle's position
+      marker = new google.maps.Marker({
+        position: startLocation,
+        map,
+        title: "Vehicle",
+        icon: "https://maps.google.com/mapfiles/kml/shapes/truck.png",
+      });
+
+      // Create markers for start and end points
+      const startMarker = new google.maps.Marker({
+        position: startLocation,
+        map,
+        title: "Start: Trichy",
+        icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+      });
+
+      const endMarker = new google.maps.Marker({
+        position: endLocation,
+        map,
+        title: "End: Kashmir",
+        icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+      });
+
+      // Draw a polyline route between the start and end points
+      routeLine = new google.maps.Polyline({
+        path: [startLocation, endLocation],
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+      });
+      routeLine.setMap(map);
+
+      // Calculate the geodesic distance between start and end points
+      const geodesicDistance = google.maps.geometry.spherical.computeDistanceBetween(
+        new google.maps.LatLng(startLocation.lat, startLocation.lng),
+        new google.maps.LatLng(endLocation.lat, endLocation.lng)
+      );
+
+      console.log(`Distance from Trichy to Kashmir: ${geodesicDistance / 1000} km`);
+
+      // Start the SSE stream to track the vehicle
+      const eventSource = new EventSource("http://127.0.0.1:8000/vehicle-tracking/");
+      eventSource.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+        
+        // Update the vehicle marker's position
+        if (data.latitude && data.longitude) {
+          const newPos = { lat: parseFloat(data.latitude), lng: parseFloat(data.longitude) };
+          marker.setPosition(newPos);
+          map.panTo(newPos);  // Move the map center to the new position
+        }
+      };
+    }
+  </script>
+
+  <!-- Load Google Maps JS API -->
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzpMKeSSuVbBGyIrw2qxJmMzGbpDb5-W0&callback=initMap">
+  </script>
+</body>
+</html>

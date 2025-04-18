@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 import time
 from .models import VehicleLocation
+from django.shortcuts import render
 
 def vehicle_stream():
     """Streams real-time vehicle GPS coordinates from DB."""
@@ -41,6 +42,11 @@ def vehicle_tracking_sse(request):
     del response["Connection"]  # Fix the error
     response["Cache-Control"] = "no-cache"
     return response
+
+
+def live_tracking_map(request):
+    return render(request, "tracking_map.html")
+
 
 @require_GET
 @csrf_exempt

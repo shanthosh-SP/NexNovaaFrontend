@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Live Vehicle Tracking</title>
+  <style>
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+<div id="eta" style="position: absolute; top: 10px; left: 10px; background: white; padding: 5px; z-index: 1000;"></div>
+
+<script>
+  let map, vehicleMarker, routePath;
+  let routeCoords = [];
+
+  const start = { lat: 10.7905, lng: 78.7047 };  // Trichy
+  const end = { lat: 34.0837, lng: 74.7973 };    // Kashmir
+
+  function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: start,
+      zoom: 6,
+      mapTypeId: "terrain",
+    });
+
+    new google.maps.Marker({
+      position: start,
+      map,
+      label: "S",
+      title: "Start Location",
+    });
+
+    new google.maps.Marker({
+      position: end,
+      map,
+      label: "E",
+      title: "End Location",
+    });
+
+    vehicleMarker = new google.maps.Marker({
+      position: start,
+      map,
+      icon: {
+        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+        scale: 5,
+        strokeColor: "#FF0000",
+      },
+    });
+
+    routePath = new google.maps.Polyline({
+      path: [],
+      geodesic: true,
+      strokeColor: "#0000FF",
+      strokeOpacity: 1.0,
+      strokeWeight: 2,
+      map: map,
+    });
+
+    startStream();
+  }
+
+  function startStream() {
+    const source = new EventSource("/vehicle-tracking/");
+    source.onmessage = function (event) {
+      const data = JSON.parse(event.data);
+      const latLng = { lat: data.latitude, lng: data.longitude };
+
+      vehicleMarker.setPosition(latLng);
+      map.panTo(latLng);
+
+      routeCoords.push(latLng);
+      routePath.setPath(routeCoords);
+
+      // Estimate distance to destination
+      const etaService = new google.maps.DistanceMatrixService();
+      etaService.getDistanceMatrix({
+        origins: [latLng],
+        destinations: [end],
+        travelMode: "DRIVING",
+      }, (response, status) => {
+        if (status === "OK") {
+          const eta = response.rows[0].elements[0].duration.text;
+          document.getElementById("eta").innerText = `🚚 ETA: ${eta}`;
+        }
+      });
+    };
+  }
+</script>
+
+<!-- Replace YOUR_API_KEY_HERE with your actual key -->
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzpMKeSSuVbBGyIrw2qxJmMzGbpDb5-W0&callback=initMap">
+</script>
+
+</body>
+</html>
