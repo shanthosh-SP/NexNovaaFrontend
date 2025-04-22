@@ -1,0 +1,122 @@
+<div class="dashboard-container">
+    <div class="row">
+        <div class="col-md-7 pe-0 mt-3">
+            <h3 class="tex-black">Dashboard</h3>
+        </div>
+        <div class="col-md-5 mt-3">
+            <div class="w-100 h-100 d-flex justify-content-end align-items-center">
+                <div class="air-force-blue-bg px-3 py-2 text-white w-auto text-center border-radius-1">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M8.21536 0H9.78513C9.92466 0 9.99443 0.0666667 9.99443 0.2V17.8C9.99443 17.9333 9.92466 18 9.78513 18H8.21536C8.07583 18 8.00606 17.9333 8.00606 17.8V0.2C8.00606 0.0666667 8.07583 0 8.21536 0Z"
+                            fill="#124559" />
+                        <path
+                            d="M0.209546 8.05H17.7909C17.9305 8.05 18.0002 8.11667 18.0002 8.25V9.75C18.0002 9.88333 17.9305 9.95 17.7909 9.95H0.209546C0.0700116 9.95 0.000244141 9.88333 0.000244141 9.75V8.25C0.000244141 8.11667 0.0700116 8.05 0.209546 8.05Z"
+                            fill="#124559" />
+                    </svg>
+                    &nbsp;
+                    Add New Shipment
+                </div>
+                <div class="air-force-blue-bg px-3 py-2 text-white w-auto text-center border-radius-1 mx-2">
+                    <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M0 15.3V13.95H2.025V7.065C2.025 5.805 2.42277 4.68375 3.2183 3.70125C4.01384 2.71875 5.0625 2.1 6.36429 1.845V1.1925C6.36429 0.8475 6.49687 0.5625 6.76205 0.3375C7.02723 0.1125 7.34464 0 7.71429 0C8.08393 0 8.40134 0.1125 8.66652 0.3375C8.9317 0.5625 9.06429 0.8475 9.06429 1.1925V1.845C10.3661 2.1 11.4187 2.71875 12.2223 3.70125C13.0259 4.68375 13.4277 5.805 13.4277 7.065V13.95H15.4286V15.3H0ZM7.71429 18C7.2 18 6.75 17.8237 6.36429 17.4713C5.97857 17.1187 5.78571 16.695 5.78571 16.2H9.64286C9.64286 16.695 9.45402 17.1187 9.07634 17.4713C8.69866 17.8237 8.24464 18 7.71429 18ZM3.47143 13.95H11.9812V7.065C11.9812 5.955 11.5714 5.01 10.7518 4.23C9.93214 3.45 8.92768 3.06 7.73839 3.06C6.54911 3.06 5.54062 3.45 4.71295 4.23C3.88527 5.01 3.47143 5.955 3.47143 7.065V13.95Z"
+                            fill="#eff6e0" />
+                    </svg>
+                </div>
+                <div class="air-force-blue-bg px-3 py-2 text-white w-auto text-center border-radius-1">
+                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M17.754 14a2.249 2.249 0 0 1 2.25 2.249v.575c0 .894-.32 1.76-.902 2.438-1.57 1.834-3.957 2.739-7.102 2.739-3.146 0-5.532-.905-7.098-2.74a3.75 3.75 0 0 1-.898-2.435v-.577a2.249 2.249 0 0 1 2.249-2.25h11.501Zm0 1.5H6.253a.749.749 0 0 0-.75.749v.577c0 .536.192 1.054.54 1.461 1.253 1.468 3.219 2.214 5.957 2.214s4.706-.746 5.962-2.214a2.25 2.25 0 0 0 .541-1.463v-.575a.749.749 0 0 0-.749-.75ZM12 2.004a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"
+                            fill="#eff6e0" />
+                    </svg>
+                    Name
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 pe-0 mt-3">
+            <div class="row">
+                <div class="col-md-5 pe-0">
+                    <div class="air-force-blue-bg xy-box-shadow border-radius-1 p-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4 class="m-0">Total Shipment</h4>
+                            <select name="monthly" class="unstyled-select tex-black">
+                                <option value="monthly">Monthly</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="daily">Daily</option>
+                            </select>
+                        </div>
+                        <div class="beige-bg border-radius-1 mt-1">
+                            <app-progress-chart [elementId]="'vehicle-progress'" [chartData]="70"></app-progress-chart>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="air-force-blue-bg xy-box-shadow border-radius-1 h-100 p-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4 class="m-0">Shipment Status</h4>
+                            <a href="/home/vehicle-tracking" class="tex-black font-weight-600 cursor"><u>View
+                                    All</u></a>
+                        </div>
+                        <div class="beige-bg border-radius-1 mt-1 h-90"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mt-3">
+                    <div class="air-force-blue-bg xy-box-shadow border-radius-1 h-100 p-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4 class="m-0">Total Shipment</h4>
+                            <a href="/home/vehicle-tracking" class="tex-black font-weight-600 cursor"><u>View
+                                    All</u></a>
+                        </div>
+                        <div class="beige-bg border-radius-1 mt-1 h-10"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-3">
+            <div class="air-force-blue-bg xy-box-shadow border-radius-1 h-100 p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="m-0">Total Shipment</h4>
+                    <select name="monthly" class="unstyled-select tex-black">
+                        <option value="monthly">Monthly</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="daily">Daily</option>
+                    </select>
+                </div>
+                <div class="beige-bg border-radius-1 mt-1 h-90"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-12 mt-3">
+            <div class="air-force-blue-bg border-radius-1 xy-box-shadow p-2">
+                <div class="row">
+                    <div class="col-md-8 mt-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4 class="m-0">Shipment Tracking List</h4>
+                            <a href="/home/vehicle-tracking" class="tex-black font-weight-600 cursor"><u>View
+                                    All</u></a>
+                        </div>
+                        <div class="beige-bg border-radius-1 ms-1 mt-1 h-85 mt-3"></div>
+                    </div>
+                    <div class="col-md-4 mt-2">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h5 class="tex-black m-0">Map Tracking</h5>
+                            <a href="/home/vehicle-tracking" class="tex-black font-weight-600 cursor me-1"><u>View
+                                    All</u></a>
+                        </div>
+                        <div class="beige-bg border-radius-1 p-2 mt-3">
+                            <div class="h-35vh mt-2">
+                                <app-map-tracking class="border-radius-1"></app-map-tracking>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

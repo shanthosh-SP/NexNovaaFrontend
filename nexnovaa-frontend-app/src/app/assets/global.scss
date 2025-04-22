@@ -31,8 +31,14 @@ body {
 }
 
 :root {
+    --bs-white: #fff;
+    --bs-rich-black: #212121;
+    --bs-beige: #F4F6F8;
+    --bs-amber: #F57C00;
+    --b-air-force-blue: #598392;
+    --bs-light-grey: #cdcdcd;
     --bs-red-color: #C50F1F;
-    --bs-nav-color: #4D5DFA;
+    --nav-bg-color: #124559;
 }
 
 @for $i from 8 through 24 {
@@ -47,6 +53,44 @@ body {
     }
 }
 
+// util.scss or your global styles
+@for $i from 5 through 100 {
+    .h-#{$i} {
+        height: #{$i + "%"};
+    }
+}
+
+
+.xy-box-shadow {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1411764706), 0 0 2px rgba(0, 0, 0, 0.1215686275);
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.overflow-y-scroll {
+    overflow-y: auto;
+}
+
+.unstyled-select {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.unstyled-select:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+a,
+li,
+.text-decoration-none {
+    all: unset;
+    text-decoration: none;
+    color: inherit;
+}
 
 .d-flex-center {
     display: flex;
@@ -58,6 +102,54 @@ body {
     color: var(--bs-red-color);
 }
 
+.white-bg{
+    background-color: var(--bs-white);
+}
+
+.beige-bg {
+    background-color: var(--bs-beige);
+}
+
+.amber-bg {
+    background-color: var(--bs-amber);
+}
+
+.grey-bg {
+    background-color: var(--bs-light-grey);
+}
+
+.air-force-blue-bg {
+    background-color: var(--b-air-force-blue);
+}
+
 .nav-bg {
-    background-color: var(--bs-nav-color);
+    background-color: var(--nav-bg-color);
+}
+
+.position-bottom {
+    bottom: 1%;
+}
+
+.position-center {
+    bottom: 30%;
+}
+
+.border-radius-1 {
+    border-radius: 1rem;
+}
+
+.font-weight-600 {
+    font-weight: 600;
+}
+
+.text-white {
+    color: var(--bs-beige);
+}
+
+.tex-black {
+    color: var(--bs-rich-black);
+}
+
+.text-blue {
+    color: var(--b-air-force-blue);
 }
