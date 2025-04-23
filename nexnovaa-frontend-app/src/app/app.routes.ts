@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { MapTrackingComponent } from './map-tracking/map-tracking.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TrackingListComponent } from './tracking-list/tracking-list.component';
+import { GoogleMapsComponent } from './google-maps/google-maps.component';
 
 export const routes: Routes = [
     {
@@ -25,6 +26,10 @@ export const routes: Routes = [
             {
                 path: 'tracking-list',
                 component: TrackingListComponent
+            },
+            {
+                path: 'maps',
+                component: GoogleMapsComponent
             },
         ]
     },
