@@ -1,22 +1,3 @@
-// import { Component, ViewChild } from '@angular/core';
-// import { GoogleMapsModule, MapInfoWindow, MapMarker, MapTrafficLayer, MapTransitLayer } from '@angular/google-maps';
-
-// @Component({
-//   selector: 'app-google-maps',
-//   standalone: true,
-//   imports: [GoogleMapsModule, MapInfoWindow, MapMarker, MapTrafficLayer, MapTransitLayer],
-//   templateUrl: './google-maps.component.html',
-//   styleUrl: './google-maps.component.scss'
-// })
-// export class GoogleMapsComponent {
-//   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
-//   center: google.maps.LatLngLiteral = { lat: 23.0225, lng: 72.5714 };
-//   markerLatLong: google.maps.LatLngLiteral[] = [
-//     { lat: 23.0557, lng: 72.4687 },
-//     { lat: 23.0504, lng: 72.4991 },
-//   ];
-
-// }
 import { Component, OnInit } from '@angular/core';
 import { GoogleMapsModule, MapInfoWindow, MapMarker, MapTrafficLayer, MapTransitLayer } from '@angular/google-maps';
 
@@ -32,7 +13,9 @@ export class GoogleMapsComponent implements OnInit {
   vehiclePosition: google.maps.LatLngLiteral = { lat: 13.0702, lng: 80.2170 };
   routePath: google.maps.LatLngLiteral[] = [];
   index = 0;
+  zoom: any;
   private intervalId: any;
+  zoomInterval: any;
   vehicleIcon = {
     url: 'src/app/assets/vehicle.png',
     scaledSize: new google.maps.Size(40, 40),
@@ -41,6 +24,7 @@ export class GoogleMapsComponent implements OnInit {
   };
 
   ngOnInit() {
+    this.zoom = 13;
     const directionsService = new google.maps.DirectionsService();
 
     directionsService.route(
@@ -63,7 +47,7 @@ export class GoogleMapsComponent implements OnInit {
             } else {
               clearInterval(this.intervalId);
             }
-          }, 100); // adjust for speed
+          }, 1000); // adjust for speed
         } else {
           console.error('Directions request failed due to', status);
         }
@@ -84,8 +68,20 @@ export class GoogleMapsComponent implements OnInit {
       };
     }
     this.vehiclePosition = current;
+
     console.log('Vehicle Position:', this.vehiclePosition);  // Log to track position
     this.index++;
+  }
+
+  zoomToMarker() {
+    this.zoomInterval = setInterval(() => {
+      this.center = { lat: this.vehiclePosition.lat, lng: this.vehiclePosition.lng };
+      this.zoom = 18;
+    }, 300);
+  }
+
+  destroyZoom() {
+    clearInterval(this.zoomInterval);
   }
 
 
