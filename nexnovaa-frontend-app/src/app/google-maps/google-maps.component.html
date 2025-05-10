@@ -1,0 +1,18 @@
+<google-map [center]="center" [zoom]="zoom" height="95vh" width="100%">
+
+    <map-traffic-layer [autoRefresh]="true" />
+
+    <!-- Vehicle Marker -->
+    <map-marker [position]="vehiclePosition" (mapClick)="zoomToMarker()"></map-marker>
+
+    <!-- Route Trail Polyline -->
+    <map-polyline [path]="routePath.slice(0, index)" [options]="{ strokeColor: '#ffff00', strokeWeight: 5}">
+    </map-polyline>
+
+    <!-- Full Route Polyline (Red) -->
+    @if(routePath.length){
+    <map-polyline [path]="routePath" [options]="{ strokeColor: '#FF0000', strokeWeight: 4 }">
+    </map-polyline>
+    }
+
+</google-map>

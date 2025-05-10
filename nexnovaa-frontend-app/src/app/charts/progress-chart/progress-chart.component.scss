@@ -1,0 +1,9 @@
+.basic-timeline {
+    width: 100%;
+    height: 250px;
+
+    ::ng-deep canvas {
+        height: 100% !important;
+        width: 100% !important;
+    }
+}
